@@ -9,6 +9,8 @@ class Item extends React.Component {
     this.setState({
       count: this.state.count + 1
     })
+
+    this.props.totalHandle(1)
   }
   // 购买数量减1
   handleSub = () => {
@@ -16,6 +18,8 @@ class Item extends React.Component {
     this.setState({
       count: this.state.count - 1
     })
+
+    this.props.totalHandle(-1)
   }
   render() {
     const { count } = this.state

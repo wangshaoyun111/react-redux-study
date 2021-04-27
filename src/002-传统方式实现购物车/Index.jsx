@@ -6,15 +6,24 @@ import Item from './Item.jsx'
 import Total from './Total.jsx'
 
 class Cart extends React.Component {
+  state = {
+    allCount: 0
+  }
+  // 用来计算 count 的总和
+  totalHandle = (val) => {
+    this.setState({
+      allCount: this.state.allCount + val
+    })
+  }
   render() {
     return (
       <div className="cart-container">
         <h4>购物车页面</h4>
         <hr />
-        <Item name='apple' />
-        <Item name='orange' />
-        <Item name='banana' />
-        <Total />
+        <Item totalHandle={this.totalHandle} name='apple' />
+        <Item totalHandle={this.totalHandle} name='orange' />
+        <Item totalHandle={this.totalHandle} name='banana' />
+        <Total allCount={this.state.allCount} />
       </div>
     )
   }

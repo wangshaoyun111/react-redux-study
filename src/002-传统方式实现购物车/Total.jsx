@@ -1,10 +1,11 @@
 import React from 'react'
 
 class Total extends React.Component {
-  render () {
+  render() {
+    const { allCount } = this.props
     return (
       <div className="total-container">
-        商品总数：【0】
+        商品总数：【{allCount}】
       </div>
     )
   }
