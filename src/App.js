@@ -1,25 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-
+// 导入购物车案例
+import Cart from './002-传统方式实现购物车/Index.jsx'
+import './index.css'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Cart />
     </div>
   );
 }
 
-export default App;
+export default App
