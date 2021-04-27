@@ -11,9 +11,9 @@ class Cart extends React.Component {
       <div className="cart-container">
         <h4>购物车页面</h4>
         <hr />
-        <Item />
-        <Item />
-        <Item />
+        <Item name='apple' />
+        <Item name='orange' />
+        <Item name='banana' />
         <Total />
       </div>
     )

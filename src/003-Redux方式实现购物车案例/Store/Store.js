@@ -1,10 +1,10 @@
 // 1  导入 cerateStore 方法 用来创建仓库
-import { cerateStore } from 'redux'
+import { createStore } from 'redux'
 
 // 3 创建 初始化数据
 const initValue = {
-    apple: 0,
-    orange: 0,
+    apple: 1,
+    orange:1,
     banana:0
 }
 
@@ -20,6 +20,6 @@ const reducer = (state, action) => {
 // 需要接收两个参数
 // 第一个参数：操作变更数据的方法 reducer
 // 第二个参数：初始化的数据
-const store = cerateStore(reducer,initValue)
+const store = createStore(reducer,initValue)
 
 export default store
