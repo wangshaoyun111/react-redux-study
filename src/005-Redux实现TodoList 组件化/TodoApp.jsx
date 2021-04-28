@@ -4,7 +4,6 @@ import List from './List.jsx'
 import Footer from './Footer.jsx'
 import 'todomvc-common/base.css'
 import 'todomvc-app-css/index.css'
-
 class TodoApp extends React.Component {
   state = {
     currentType: 'all',
@@ -171,7 +170,6 @@ class TodoApp extends React.Component {
 
   render() {
     let { todos, currentType } = this.state
-
     // 更加当前条件过来出列表数据
     todos = this.filterList(currentType)
     return (
@@ -194,5 +192,7 @@ class TodoApp extends React.Component {
     )
   }
 }
+
+
 
 export default TodoApp
