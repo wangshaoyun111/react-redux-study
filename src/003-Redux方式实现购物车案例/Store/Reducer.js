@@ -17,7 +17,7 @@ const reducer = (state, action) => {
             return Service.subShop(state, action)
         
         default:
-            break;
+            return state  
     }
 }
 export default reducer
