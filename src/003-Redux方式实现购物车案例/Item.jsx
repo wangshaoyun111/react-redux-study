@@ -34,12 +34,20 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
 
   const addHandle = () => {
-    let action = null
+    // action 实际就是一个对象，这个对象描述执行的动作，行为
+    // action 必须有一个type字段，这个字段必须是string类型
+    let action = {
+      type: 'add',
+      name: ownProps.name
+    }
     dispatch(action)
   }
 
   const subHandle = () => {
-    let action = null
+    let action = {
+      type: 'sub',
+      name: ownProps.name
+    }
     dispatch(action)
   }
 
