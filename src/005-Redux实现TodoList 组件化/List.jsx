@@ -47,6 +47,7 @@ class List extends React.Component {
   render() {
     let { todos } = this.props
     let { isAll } = this.state
+    console.log(todos);
     let todoTags = todos.map(item => (
       <li key={item.id} className={[item.done ? 'completed' : '', item.isEdit ? 'editing' : ''].join(' ')}>
         <div className="view" onDoubleClick={this.handleDoubleClick.bind(this, item.id)}>
