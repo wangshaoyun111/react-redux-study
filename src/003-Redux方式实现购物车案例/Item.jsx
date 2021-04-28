@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+// 导入封装action
+import { addAction, subAction } from './Store/Actions'
 class Item extends React.Component {
   render() {
     const { name, num, addHandle, subHandle } = this.props
@@ -36,19 +38,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const addHandle = () => {
     // action 实际就是一个对象，这个对象描述执行的动作，行为
     // action 必须有一个type字段，这个字段必须是string类型
-    let action = {
-      type: 'add',
-      name: ownProps.name
-    }
-    dispatch(action)
+    // let action = addAction(ownProps)
+    dispatch(addAction(ownProps))
   }
 
   const subHandle = () => {
-    let action = {
-      type: 'sub',
-      name: ownProps.name
-    }
-    dispatch(action)
+    // let action = subAction(ownProps)
+    dispatch(subAction(ownProps))
   }
 
   return {
