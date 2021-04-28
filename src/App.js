@@ -1,5 +1,5 @@
 // 导入 TodoApp 组件
-import TodoApp from './004-TodoList 组件化模板/TodoApp'
+import TodoApp from './005-Redux实现TodoList 组件化/TodoApp'
 
 function App() {
   return (
