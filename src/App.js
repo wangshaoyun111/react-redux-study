@@ -1,10 +1,16 @@
 // 导入 TodoApp 组件
 import TodoApp from './005-Redux实现TodoList 组件化/TodoApp'
-
+// 导入 Provider 组件，用来向组件传递数据
+import { Provider } from 'react-redux'
+// 导入唯一数据源
+import store from './005-Redux实现TodoList 组件化/Store/Store'
 function App() {
   return (
     <div className='app'>
-      <TodoApp></TodoApp>
+      {/* 使用Provider将组建包裹 ，添加store属性*/}
+      <Provider store={store}>
+        <TodoApp></TodoApp>
+      </Provider>
     </div>
   )
 }
