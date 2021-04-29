@@ -4,6 +4,7 @@
  * @returns 
  */
 function Reducer(state, action) {
+    console.log(action);
     let newState = null
     switch (action.type) {
         case 'add_task':
@@ -36,6 +37,16 @@ function Reducer(state, action) {
                 return item.id === action.id
             })
             newState.todos.splice(index, 1)
+            return newState
+        case 'toggle_one_task':
+            newState = JSON.parse(JSON.stringify(state))
+            newState.todos.some(item => {
+                if (item.id === action.id) {
+                    item.done = !item.done
+                    return true
+                }
+                return false
+            })
             return newState
         default:
             return state

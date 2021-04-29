@@ -1,17 +1,17 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteTaskAction } from './Store/Actions'
+import { deleteTaskAction, toggleTaskAction } from './Store/Actions'
 class List extends React.Component {
 
   state = {
     isAll: false
   }
 
-  handleDelete = (id) => {
-    // 控制删除操作
-    this.props.deleteTask(id)
-  }
+  // handleDelete = (id) => {
+  //   // 控制删除操作
+  //   this.props.deleteTask(id)
+  // }
 
   handleCheck = (id) => {
     // 控制单选
@@ -46,12 +46,12 @@ class List extends React.Component {
   }
 
   render() {
-    let { todos, deleteHandle } = this.props
+    let { todos, deleteHandle, toggleItem } = this.props
     let { isAll } = this.state
     let todoTags = todos.map(item => (
       <li key={item.id} className={[item.done ? 'completed' : '', item.isEdit ? 'editing' : ''].join(' ')}>
         <div className="view" onDoubleClick={this.handleDoubleClick.bind(this, item.id)}>
-          <input checked={item.done} onChange={this.handleCheck.bind(this, item.id)} className="toggle" type="checkbox" />
+          <input checked={item.done} onChange={() => toggleItem(item.id)} className="toggle" type="checkbox" />
           <label>{item.etitle}</label>
           <button className="destroy" onClick={() => deleteHandle(item.id)}></button>
         </div>
@@ -84,8 +84,14 @@ const mapDispatchToProps = (dispatch) => {
     dispatch(action)
 
   }
+  // 切换单个任务
+  const toggleItem = (id) => {
+    let action = toggleTaskAction(id)
+    dispatch(action)
+  }
   return {
-    deleteHandle
+    deleteHandle,
+    toggleItem
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(List)

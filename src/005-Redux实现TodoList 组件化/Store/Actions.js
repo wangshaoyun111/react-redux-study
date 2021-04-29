@@ -12,3 +12,9 @@ export const deleteTaskAction = (id) => {
         id
     }
 }
+export const toggleTaskAction = (id) => {
+    return {
+        type: 'toggle_one_task',
+        id
+    }
+}
