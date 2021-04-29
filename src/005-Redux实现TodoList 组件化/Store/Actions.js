@@ -24,3 +24,8 @@ export const toggleAllAction = (status) => {
         status
     }
 }
+export const deleteTaskDone = () => {
+    return {
+        type: 'delete_done'
+    }
+}

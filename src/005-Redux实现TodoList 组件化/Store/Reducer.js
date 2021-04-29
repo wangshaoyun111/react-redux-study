@@ -54,6 +54,12 @@ function Reducer(state, action) {
                 item.done = !action.status
             });
             return newState
+        case 'delete_done':
+            newState = JSON.parse(JSON.stringify(state))
+            newState.todos = newState.todos.filter(item => {
+                return !item.done
+            })
+            return newState
         default:
             return state
     }

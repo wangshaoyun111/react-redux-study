@@ -1,6 +1,7 @@
 
 import React from 'react'
-
+import { connect } from 'react-redux'
+import { deleteTaskDone } from './Store/Actions'
 class Footer extends React.Component {
   state = {
     currentType: 'all',
@@ -26,7 +27,7 @@ class Footer extends React.Component {
   }
 
   render() {
-    let { num } = this.props
+    let { num, handleClearAll } = this.props
     let { currentType } = this.state
     return (
       <footer className="footer">
@@ -42,10 +43,31 @@ class Footer extends React.Component {
             <a data-id='done' className={currentType === 'done' ? 'selected' : ''} href="#/completed">已完成</a>
           </li>
         </ul>
-        <button onClick={this.handleClearAll} className="clear-completed">清除所有已完成任务</button>
+        <button onClick={() => handleClearAll()} className="clear-completed">清除所有已完成任务</button>
       </footer>
     )
   }
 }
-
-export default Footer
+const mapStateToProps = (state) => {
+  let num = 0
+  state.todos.forEach(item => {
+    if (!item.done) {
+      // 没有完成的任务
+      num += 1
+    }
+  })
+  return {
+    todos: state.todos,
+    num
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  const handleClearAll = () => {
+    let action = deleteTaskDone()
+    dispatch(action)
+  }
+  return {
+    handleClearAll
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Footer)
