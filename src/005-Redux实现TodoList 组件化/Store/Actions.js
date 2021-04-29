@@ -5,3 +5,10 @@ export const addTaskAction = (value) => {
         value
     }
 }
+
+export const deleteTaskAction = (id) => {
+    return {
+        type: 'deleteTask',
+        id
+    }
+}

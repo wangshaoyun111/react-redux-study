@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { deleteTaskAction } from './Store/Actions'
 class List extends React.Component {
 
   state = {
@@ -46,15 +46,14 @@ class List extends React.Component {
   }
 
   render() {
-    let { todos } = this.props
+    let { todos, deleteHandle } = this.props
     let { isAll } = this.state
-    console.log(todos);
     let todoTags = todos.map(item => (
       <li key={item.id} className={[item.done ? 'completed' : '', item.isEdit ? 'editing' : ''].join(' ')}>
         <div className="view" onDoubleClick={this.handleDoubleClick.bind(this, item.id)}>
           <input checked={item.done} onChange={this.handleCheck.bind(this, item.id)} className="toggle" type="checkbox" />
           <label>{item.etitle}</label>
-          <button className="destroy" onClick={this.handleDelete.bind(this, item.id)}></button>
+          <button className="destroy" onClick={() => deleteHandle(item.id)}></button>
         </div>
         <input value={item.etitle} onChange={this.handleEditEtile.bind(this, item.id)} onBlur={this.handleDoubleClick.bind(this, item.id)} className="edit" />
       </li>
@@ -76,4 +75,17 @@ const mapStateToProps = (state) => {
     todos: state.todos
   }
 }
-export default connect(mapStateToProps)(List)
+const mapDispatchToProps = (dispatch) => {
+  // 删除项目
+  const deleteHandle = (id) => {
+    // 写一个action
+    // dispatch分发
+    let action = deleteTaskAction(id)
+    dispatch(action)
+
+  }
+  return {
+    deleteHandle
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(List)

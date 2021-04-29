@@ -51,6 +51,7 @@ const mapDispatchToProps = (dispatch) => {
     if (e.keyCode === 13) {
       let action = Action.addTaskAction(e.target.value)
       dispatch(action)
+      e.target.value = ''
     }
   }
   return {
