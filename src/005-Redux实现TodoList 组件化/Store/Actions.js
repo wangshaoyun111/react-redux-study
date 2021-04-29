@@ -18,3 +18,9 @@ export const toggleTaskAction = (id) => {
         id
     }
 }
+export const toggleAllAction = (status) => {
+    return {
+        type: 'toggle_all',
+        status
+    }
+}

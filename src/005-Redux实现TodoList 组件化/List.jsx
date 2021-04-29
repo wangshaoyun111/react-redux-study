@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteTaskAction, toggleTaskAction } from './Store/Actions'
+import { deleteTaskAction, toggleTaskAction, toggleAllAction } from './Store/Actions'
 class List extends React.Component {
 
   state = {
@@ -13,20 +13,20 @@ class List extends React.Component {
   //   this.props.deleteTask(id)
   // }
 
-  handleCheck = (id) => {
-    // 控制单选
-    this.props.toggleItem(id)
-  }
+  // handleCheck = (id) => {
+  //   // 控制单选
+  //   this.props.toggleItem(id)
+  // }
 
-  toggleAll = () => {
-    // 顶部全选按钮
-    this.setState({
-      isAll: !this.state.isAll
-    }, () => {
-      // 控制所有的列表的选中状态
-      this.props.toggleAll(this.state.isAll)
-    })
-  }
+  // toggleAll = () => {
+  //   // 顶部全选按钮
+  //   this.setState({
+  //     isAll: !this.state.isAll
+  //   }, () => {
+  //     // 控制所有的列表的选中状态
+  //     this.props.toggleAll(this.state.isAll)
+  //   })
+  // }
 
   handleDoubleClick = (id, e) => {
     // 双击之后进入编辑状态
@@ -46,8 +46,7 @@ class List extends React.Component {
   }
 
   render() {
-    let { todos, deleteHandle, toggleItem } = this.props
-    let { isAll } = this.state
+    let { todos, deleteHandle, toggleItem, isAll, toggleAll } = this.props
     let todoTags = todos.map(item => (
       <li key={item.id} className={[item.done ? 'completed' : '', item.isEdit ? 'editing' : ''].join(' ')}>
         <div className="view" onDoubleClick={this.handleDoubleClick.bind(this, item.id)}>
@@ -61,7 +60,7 @@ class List extends React.Component {
     return (
       <section className="main">
         <input defaultChecked={isAll} id="toggle-all" className="toggle-all" type="checkbox" />
-        <label onClick={this.toggleAll} htmlFor="toggle-all">全部标记为完成</label>
+        <label onClick={() => toggleAll(isAll)} htmlFor="toggle-all">全部标记为完成</label>
         <ul className="todo-list">
           {todoTags}
         </ul>
@@ -71,8 +70,14 @@ class List extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  let isAll = state.todos.every(item => {
+    // 如果 done 都是 true 返回true
+    // 如果有一项 不符合要求返回false
+    return item.done
+  })
   return {
-    todos: state.todos
+    todos: state.todos,
+    isAll
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -89,9 +94,15 @@ const mapDispatchToProps = (dispatch) => {
     let action = toggleTaskAction(id)
     dispatch(action)
   }
+  // 全选和全不选任务
+  const toggleAll = (isAll) => {
+    let action = toggleAllAction(isAll)
+    dispatch(action)
+  }
   return {
     deleteHandle,
-    toggleItem
+    toggleItem,
+    toggleAll
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(List)

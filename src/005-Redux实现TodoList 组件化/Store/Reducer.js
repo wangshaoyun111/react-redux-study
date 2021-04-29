@@ -48,6 +48,12 @@ function Reducer(state, action) {
                 return false
             })
             return newState
+        case 'toggle_all':
+            newState = JSON.parse(JSON.stringify(state))
+            newState.todos.forEach(item => {
+                item.done = !action.status
+            });
+            return newState
         default:
             return state
     }
